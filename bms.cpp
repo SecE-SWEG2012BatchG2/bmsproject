@@ -1,4 +1,3 @@
-// BANK MANAGEMENT SYSTEM
 // 1. Michael Gashaw
 // 2. Minase Driba
 // 3. Minase Fikadu
@@ -48,8 +47,15 @@ struct Account
 	unsigned long long int acc_no;
 	Transaction transactions[6];
 	unsigned int Index = 0;
-} customer[10];
-int customer_counter = 0, user = 0;
+} customer[10] = {
+	{"Michael Gashaw", 20, 'M' , 953843537, "AA", 1, "0466", 1000, 1000123456789},
+	{"Minase Driba", 20, 'M' , 909168299, "AA", 1, "0480", 1000, 1000123456790},
+	{"Minase Fikadu", 20, 'M' , 966196045, "AA", 1, "0482", 1000, 1000123456791},
+	{"Mohammed Yezid", 20, 'M' , 966906285, "AA", 1, "0487", 1000, 1000123456792},
+	{"Nathan Lijalem", 20, 'M' , 906246318, "AA", 1, "0516", 1000, 1000123456793}
+};
+
+int customer_counter = 5, user = 0;
 long long int initial_acc_no = 1000123456794, *Index;
 string option;
 
@@ -172,19 +178,9 @@ int login_page()
 {
 	string name, password;
 	int chance = 5;
-	string option;
 
 	system("clear");
 	cout << endl;
-	if (!customer_counter)
-	{
-		cout << "\tNO ACCOUNT TO LOGIN!\n\tENTER 1 TO REGISTER: ";
-		cin >> option;
-		if (option == "1")
-			create_new_account_page();
-		return 0;
-	}
-
 	login:
 		accept("\tENTER USER NAME: ", &name, 20);
 		//cout << "\tENTER USER NAME: "; cin >> name;
@@ -230,7 +226,7 @@ int create_new_account_page()
 
 	system("clear");
 	cout << endl;
-	cout << "\t\t CREATE NEW ACCOUNT" << endl;
+	cout << "\t\t CREATE NEW ACCOUNT" << endl << endl;
 	cout << setfill('=') << setw(50) << left << "         " << endl;
 	cout << setfill(' ');
 	cout << "\t\t PLEASE FILL THE FOLLOWING FORM." << endl;
@@ -408,34 +404,14 @@ int account_info_page()
 		cout << '\t' << setfill('-') << setw(50) << "-" << endl;
 		cout << setfill(' ');
 	}
-	string password;
-	int chance = 3;
+
 	accept("\tThe person you are looking for: ", &owner, 20);
 
-
-	for (int i = 0; i < customer_counter; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		//if (customer[i].name.compare(owner) >= 0)
 		if (customer[i].name.compare(owner) == 0)
 		{
-
-			//accept("\tEnter the password: ", &password, 8);
-			if (customer[i].name != customer[user].name)
-			{
-chance:
-				cout << "\tEnter the password: ";
-				cin >> password;
-
-				if (customer[i].password != password)
-				{
-					cout << "\tINCORRECT PASSWORD!\n\t" << chance << " CHANCES LEFT." << endl;
-					--chance;
-					goto chance;
-					if (!chance)
-						return 1;
-				}
-			}
-
 			ownerNotFound = false;
 			cout << "\n\tACCOUNT INFORMATION PAGE\n\t";
 			cout << setfill('=') << setw(75) << "=" << endl;
